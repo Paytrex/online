@@ -1,0 +1,3740 @@
+{
+  "command": [
+    {
+      "name": "help",
+      "actions": [
+        {
+          "name": "help menu",
+          "category": "Message",
+          "type": "Send Embed",
+          "fields": [
+            {
+              "name": ".clear (anzahl)",
+              "value": "Löscht den verlauf maximum 100 Nachrichten | die dürfen auch nicht älter als 2 wochen sein!",
+              "inline": "true"
+            },
+            {
+              "name": ".kick",
+              "value": ".kick (User) 1 (Grund) kickt den user ",
+              "inline": "true"
+            },
+            {
+              "name": ".ban",
+              "value": ".ban (User) (tage) (Grund) | bannt den User (jede aktion wird in den Logs versehen)",
+              "inline": "true"
+            },
+            {
+              "name": ".ac",
+              "value": ".ac (Channel) (Überschrifft) (Main Text) macht eine sogesehen announce ohne einen User zu Taggen",
+              "inline": "true"
+            },
+            {
+              "name": ".ticket",
+              "value": ".ticket | Erstellt ein Benutzerfreundliches ticket Menue und Ticket Claim System",
+              "inline": "true"
+            },
+            {
+              "name": ".ssp",
+              "value": "Startet Schere | Stein | Papier",
+              "inline": "true"
+            }
+          ],
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "12FFFF",
+          "title": "Hilfe Menue",
+          "url": "",
+          "authorname": "NXT Service System V1.0",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "dieses sind die Fahigkeiten des Bots jeder Bot wird individuell auf dein server angepasste!",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "info",
+      "actions": [
+        {
+          "name": "send server info",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "00F8FF",
+          "title": "Server Info",
+          "url": "",
+          "authorname": "${dbsVars.CommandAuthor.displayName}",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "Name: `${dbsVars.guild.name}`\nOwner: ${dbsVars.guild.owner}\nUser: `${dbsVars.guild.memberCount}`\nRegion: `europe`\nVersion: `1.0.0`\nErstellungsdatum: `11.05.2022`\nBoost: `0`\n",
+          "thumbnail": "",
+          "image": "",
+          "footer": "Official NXT Bot service Ver 1.0",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "kick",
+      "actions": [
+        {
+          "name": "Check Admin_1",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "Spieler der Gekickt werden soll",
+              "category": "Variable",
+              "type": "Get Mentioned User",
+              "messageActionRows": [],
+              "varname": "spielerdergeckitwird",
+              "vartype": "User",
+              "savevartype": "temp"
+            },
+            {
+              "name": "Kick Grund",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "kickgrund",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "3+"
+            },
+            {
+              "name": "Benarichtigung",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Kick System",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "<@${dbsVars.CommandAuthor.id}> \nHat den User <@${tempVars.spielerdergeckitwird.id}> Gekickt\nGrund: (Wird aus Privaten Gründen nicht mit angegeben nicht angegeben) ",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log_2",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Kick System Benarichtigung",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "**Der Admin** <@${dbsVars.CommandAuthor.id}> \n**hat den User** <@${tempVars.spielerdergeckitwird.id}> erfolgreich Gekickt\n\n**Grund:** **${tempVars.kickgrund}**",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "5Sec Warten_1_1",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "Versuchten Befehl Löschen_1_1",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.UserGekickt.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "keine berechtigung_2",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF2626",
+              "title": "Fehler",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "<@${dbsVars.CommandAuthor.id}> \n Du besitzt nicht genügend Berechtigungen um diesen befehl auszuführen",
+              "thumbnail": "",
+              "image": "",
+              "footer": "NXT Service V1.0",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log_3",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Befehl versuch ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Unbefugter versuch ein Befehl auszuführen\nUser <@${dbsVars.CommandAuthor.id}> hat versucht ein Administrativen Befehl zu benutzen\nCommand: ${dbsVars.CommandMessage.content}",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "5Sec Warten_2",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "Versuchten Befehl Löschen_2",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.Commandfehler.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "ADMINISTRATOR",
+            "KICK_MEMBERS",
+            "BAN_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "clear",
+      "perms": [
+        "inhaber",
+        "supporter",
+        "developer"
+      ],
+      "actions": [
+        {
+          "name": "Check Admin_1_1",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "Clear",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "clearchatmessage",
+              "vartype": "Number",
+              "savevartype": "temp",
+              "param": "0"
+            },
+            {
+              "name": "Clear Message",
+              "category": "Channel Action",
+              "type": "Delete All Messages",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "msgcount": "${tempVars.clearchatmessage}"
+            },
+            {
+              "name": "Chat Message Clear",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Erfolgreich",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Es wurde/n erfolgreich ${tempVars.clearchatmessage} Nachricht/en gelöscht",
+              "thumbnail": "",
+              "image": "https://cdn.discordapp.com/attachments/996154373635850243/996479469982331020/Befehl_Bestatigung.gif",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "ErfolgreicherClear",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Message Clear Getätigt",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Der Admin <@${dbsVars.CommandAuthor.id}> Hat erfolgreich ${tempVars.clearchatmessage} Nachricht/en Gelöscht\nCommand: ${dbsVars.CommandMessage.content}\nChannel: ${dbsVars.CommandChannel.name}",
+              "thumbnail": "",
+              "image": "https://cdn.discordapp.com/attachments/996154373635850243/996479470317863043/Befehl_ausgefuhrt_Gif.gif",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "am",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "5Sec Warten_3",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "Befehl Löschen",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.ErfolgreicherClear.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "keine berechtigung_3",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Fehler!",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "<@${dbsVars.CommandAuthor.id}> \nDu bits nicht in der Lage diesen Administrativen Befehl auszuführen da du nicht die Benötigten Ränge / Brechtigungen Hast:",
+              "thumbnail": "",
+              "image": "",
+              "footer": "NXT Service V1.0",
+              "timestamp": "false",
+              "savetovariable": "clearversuch",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Message Clear Versuch",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Unbefugter versuch einen Befehl auszuführen\nder User <@${dbsVars.CommandAuthor.id}> hat versucht ein Administrativen Befehl zu benutzen\nCommand: ${dbsVars.CommandMessage.content}\n@Supporter Bitte einmal überprüfen",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "5Sec Warten_4",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "Versuchten Befehl Löschen_3",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.clearversuch.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "ADMINISTRATOR",
+            "MANAGE_CHANNELS",
+            "VIEW_CHANNEL",
+            "MANAGE_MESSAGES"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ban",
+      "actions": [
+        {
+          "name": "Check Admin",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "Spieler der Gebannt werden Soll",
+              "category": "Variable",
+              "type": "Get Mentioned User",
+              "messageActionRows": [],
+              "varname": "UserzumBannen",
+              "vartype": "User",
+              "savevartype": "temp"
+            },
+            {
+              "name": "LängedesBannes",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "LängedesBanns",
+              "vartype": "Number",
+              "savevartype": "temp",
+              "param": "2"
+            },
+            {
+              "name": "Bann grund",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "GrundfürBann",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "3+"
+            },
+            {
+              "name": "banninfo",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "nxt-logs",
+              "color": "FFFFFF",
+              "title": "Ban System",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "**Teammitglied** <@${dbsVars.CommandAuthor.id}>\n**Teammitglied ID:** ${dbsVars.CommandAuthor.id} \n**User der Gebannt wurde:**<@${tempVars.UserzumBannen.id}>\n**Länge des Banns:**${tempVars.LängedesBanns} Tag/e\n \n**Grund:** ${tempVars.GrundfürBann}",
+              "thumbnail": "",
+              "image": "",
+              "footer": "am",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "keine berechtigung_4",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF2626",
+              "title": "Fehler",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "<@${dbsVars.CommandAuthor.id}> \n Du besitzt nicht genügend Berechtigungen um diesen befehl auszuführen",
+              "thumbnail": "",
+              "image": "",
+              "footer": "NXT Service V1.0",
+              "timestamp": "false",
+              "savetovariable": "BanVersuch",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log_3_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Befehl versuch ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Unbefugter versuch ein Befehl auszuführen\nUser <@${dbsVars.CommandAuthor.id}> hat versucht ein Administrativen Befehl zu benutzen\nCommand: ${dbsVars.CommandMessage.content}",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "5Sec Warten_5",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "Versuchten Befehl Löschen_4",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.BanVersuch.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "ADMINISTRATOR",
+            "KICK_MEMBERS",
+            "BAN_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ac",
+      "perms": [],
+      "actions": [
+        {
+          "name": "Check Admin_2",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "Check Channel",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "Checkchannel",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "1"
+            },
+            {
+              "name": "Check Title",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "checktitle",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "2"
+            },
+            {
+              "name": "Check Embed",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "Checktebed",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "3+"
+            },
+            {
+              "name": "clearwww",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${dbsVars.CommandMessage.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            },
+            {
+              "name": "Send messagae",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${tempVars.Checkchannel}",
+              "color": "FF0000",
+              "title": "${tempVars.checktitle}",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "${tempVars.Checktebed}",
+              "thumbnail": "",
+              "image": "https://cdn.discordapp.com/attachments/996154373635850243/996481687519244430/Ankundigunng.gif",
+              "footer": "NXT Service V1.0",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log_3_1_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Es wurde eine Ankündigung Gemacht: ${tempVars.checktitle}",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "mit dem Inhalt ${tempVars.Checktebed}",
+              "thumbnail": "",
+              "image": "",
+              "footer": "am:",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "keine berechtigung_2_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF2626",
+              "title": "Fehler",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "<@${dbsVars.CommandAuthor.id}> \n Du besitzt nicht genügend Berechtigungen um diesen befehl auszuführen",
+              "thumbnail": "",
+              "image": "",
+              "footer": "NXT Service V1.0",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "PC Helden Log_3_1_2",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Befehl versuch ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Unbefugter versuch ein Befehl auszuführen\nUser <@${dbsVars.CommandAuthor.id}> hat versucht ein Administrativen Befehl zu benutzen\nCommand: ${dbsVars.CommandMessage.content}",
+              "thumbnail": "",
+              "image": "",
+              "footer": "am:",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "5Sec Warten_2_1",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "Versuchten Befehl Löschen_2_1",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.Commandfehler.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "ADMINISTRATOR",
+            "KICK_MEMBERS",
+            "BAN_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "preis",
+      "perms": [],
+      "actions": [
+        {
+          "name": "Preis Liste 2022 NXT Bots",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "19E0FF",
+          "title": "",
+          "url": "https://sites.google.com/view/nxt-bot/startseite",
+          "authorname": "Inhaber Paytrex und MockeHD",
+          "authorimageurl": "https://lh4.googleusercontent.com/dldepPfdgQCL5Bph2ZFO10m04aD-6C1CgaoOHx5G2zff8tuXLn2pZsKBmll88XYjMgqELo2qu_3yaQCmeti2nX8=w1280",
+          "authorlink": "",
+          "description": "dies sind aktuelle Preise es können aber abweichungen entstehen 🐶",
+          "thumbnail": "",
+          "image": "https://cdn.discordapp.com/attachments/996154373635850243/996155363374141561/standard_1.gif",
+          "footer": "NXT Service V1.0",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "ssp",
+      "actions": [
+        {
+          "name": "User Value",
+          "category": "Variable",
+          "type": "Generate Random Number",
+          "messageActionRows": [],
+          "varname": "user_value",
+          "min": "1",
+          "max": "3",
+          "savevartype": "temp"
+        },
+        {
+          "name": "User Value_1",
+          "category": "Variable",
+          "type": "Generate Random Number",
+          "messageActionRows": [],
+          "varname": "ki",
+          "min": "1",
+          "max": "3",
+          "savevartype": "temp"
+        },
+        {
+          "name": "check",
+          "category": "Variable",
+          "type": "Check Variable Value",
+          "trueActions": [
+            {
+              "name": "check_3",
+              "category": "Variable",
+              "type": "Check Variable Value",
+              "trueActions": [
+                {
+                  "name": "send End_2_1",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "F7FF0A",
+                  "title": "Unentschieden",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "✂/✂",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "check_4_1",
+                  "category": "Variable",
+                  "type": "Check Variable Value",
+                  "trueActions": [
+                    {
+                      "name": "send End_3_1",
+                      "category": "Message",
+                      "type": "Send Embed",
+                      "messageActionRows": [],
+                      "channelname": "${dbsVars.CommandChannel.id}",
+                      "color": "FF0000",
+                      "title": "Verloren",
+                      "url": "",
+                      "authorname": "",
+                      "authorimageurl": "",
+                      "authorlink": "",
+                      "description": "✂/🧱",
+                      "thumbnail": "",
+                      "image": "",
+                      "footer": "",
+                      "timestamp": "false",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    }
+                  ],
+                  "falseActions": [
+                    {
+                      "name": "check_5_1",
+                      "category": "Variable",
+                      "type": "Check Variable Value",
+                      "trueActions": [
+                        {
+                          "name": "send End_1_1",
+                          "category": "Message",
+                          "type": "Send Embed",
+                          "messageActionRows": [],
+                          "channelname": "${dbsVars.CommandChannel.id}",
+                          "color": "22FF00",
+                          "title": "Gewonnen",
+                          "url": "",
+                          "authorname": "",
+                          "authorimageurl": "",
+                          "authorlink": "",
+                          "description": "✂/📄",
+                          "thumbnail": "",
+                          "image": "",
+                          "footer": "",
+                          "timestamp": "false",
+                          "savetovariable": "",
+                          "savetovariabletype": "temp"
+                        }
+                      ],
+                      "falseActions": [],
+                      "messageActionRows": [],
+                      "varname": "ki",
+                      "savevartype": "temp",
+                      "compare": "equal to",
+                      "value": "3"
+                    }
+                  ],
+                  "messageActionRows": [],
+                  "varname": "ki",
+                  "savevartype": "temp",
+                  "compare": "equal to",
+                  "value": "2"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "ki",
+              "savevartype": "temp",
+              "compare": "equal to",
+              "value": "1"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "check_1",
+              "category": "Variable",
+              "type": "Check Variable Value",
+              "trueActions": [
+                {
+                  "name": "check_4",
+                  "category": "Variable",
+                  "type": "Check Variable Value",
+                  "trueActions": [
+                    {
+                      "name": "send End_2_2",
+                      "category": "Message",
+                      "type": "Send Embed",
+                      "messageActionRows": [],
+                      "channelname": "${dbsVars.CommandChannel.id}",
+                      "color": "F7FF0A",
+                      "title": "Unentschieden",
+                      "url": "",
+                      "authorname": "",
+                      "authorimageurl": "",
+                      "authorlink": "",
+                      "description": "🧱/🧱",
+                      "thumbnail": "",
+                      "image": "",
+                      "footer": "",
+                      "timestamp": "false",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    }
+                  ],
+                  "falseActions": [
+                    {
+                      "name": "check_3_1",
+                      "category": "Variable",
+                      "type": "Check Variable Value",
+                      "trueActions": [
+                        {
+                          "name": "send End_1_2",
+                          "category": "Message",
+                          "type": "Send Embed",
+                          "messageActionRows": [],
+                          "channelname": "${dbsVars.CommandChannel.id}",
+                          "color": "FF0000",
+                          "title": "Verloren",
+                          "url": "",
+                          "authorname": "",
+                          "authorimageurl": "",
+                          "authorlink": "",
+                          "description": "🧱/📄",
+                          "thumbnail": "",
+                          "image": "",
+                          "footer": "",
+                          "timestamp": "false",
+                          "savetovariable": "",
+                          "savetovariabletype": "temp"
+                        }
+                      ],
+                      "falseActions": [
+                        {
+                          "name": "check_5_2",
+                          "category": "Variable",
+                          "type": "Check Variable Value",
+                          "trueActions": [
+                            {
+                              "name": "send End_3_2",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${dbsVars.CommandChannel.id}",
+                              "color": "5FFF00",
+                              "title": "Gewonnen",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "🧱/✂",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "",
+                              "savetovariabletype": "temp"
+                            }
+                          ],
+                          "falseActions": [],
+                          "messageActionRows": [],
+                          "varname": "ki",
+                          "savevartype": "temp",
+                          "compare": "equal to",
+                          "value": "3"
+                        }
+                      ],
+                      "messageActionRows": [],
+                      "varname": "ki",
+                      "savevartype": "temp",
+                      "compare": "equal to",
+                      "value": "1"
+                    }
+                  ],
+                  "messageActionRows": [],
+                  "varname": "ki",
+                  "savevartype": "temp",
+                  "compare": "equal to",
+                  "value": "2"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "check_2",
+                  "category": "Variable",
+                  "type": "Check Variable Value",
+                  "trueActions": [
+                    {
+                      "name": "check_5",
+                      "category": "Variable",
+                      "type": "Check Variable Value",
+                      "trueActions": [
+                        {
+                          "name": "send End_2_3",
+                          "category": "Message",
+                          "type": "Send Embed",
+                          "messageActionRows": [],
+                          "channelname": "${dbsVars.CommandChannel.id}",
+                          "color": "F7FF0A",
+                          "title": "Unentschieden",
+                          "url": "",
+                          "authorname": "",
+                          "authorimageurl": "",
+                          "authorlink": "",
+                          "description": "📄/📄",
+                          "thumbnail": "",
+                          "image": "",
+                          "footer": "",
+                          "timestamp": "false",
+                          "savetovariable": "",
+                          "savetovariabletype": "temp"
+                        }
+                      ],
+                      "falseActions": [
+                        {
+                          "name": "check_3_2",
+                          "category": "Variable",
+                          "type": "Check Variable Value",
+                          "trueActions": [
+                            {
+                              "name": "send End_3_3",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${dbsVars.CommandChannel.id}",
+                              "color": "FF0000",
+                              "title": "Verloren",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "📄/✂",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "",
+                              "savetovariabletype": "temp"
+                            }
+                          ],
+                          "falseActions": [
+                            {
+                              "name": "check_4_2",
+                              "category": "Variable",
+                              "type": "Check Variable Value",
+                              "trueActions": [
+                                {
+                                  "name": "send End_1_3",
+                                  "category": "Message",
+                                  "type": "Send Embed",
+                                  "messageActionRows": [],
+                                  "channelname": "${dbsVars.CommandChannel.id}",
+                                  "color": "22FF00",
+                                  "title": "Gewonnen",
+                                  "url": "",
+                                  "authorname": "",
+                                  "authorimageurl": "",
+                                  "authorlink": "",
+                                  "description": "📄/🧱",
+                                  "thumbnail": "",
+                                  "image": "",
+                                  "footer": "",
+                                  "timestamp": "false",
+                                  "savetovariable": "",
+                                  "savetovariabletype": "temp"
+                                }
+                              ],
+                              "falseActions": [],
+                              "messageActionRows": [],
+                              "varname": "ki",
+                              "savevartype": "temp",
+                              "compare": "equal to",
+                              "value": "2"
+                            }
+                          ],
+                          "messageActionRows": [],
+                          "varname": "ki",
+                          "savevartype": "temp",
+                          "compare": "equal to",
+                          "value": "1"
+                        }
+                      ],
+                      "messageActionRows": [],
+                      "varname": "ki",
+                      "savevartype": "temp",
+                      "compare": "equal to",
+                      "value": "3"
+                    }
+                  ],
+                  "falseActions": [],
+                  "messageActionRows": [],
+                  "varname": "user_value",
+                  "savevartype": "temp",
+                  "compare": "equal to",
+                  "value": "3"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "user_value",
+              "savevartype": "temp",
+              "compare": "equal to",
+              "value": "2"
+            }
+          ],
+          "messageActionRows": [],
+          "varname": "user_value",
+          "savevartype": "temp",
+          "compare": "equal to",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "bal",
+      "actions": [
+        {
+          "name": "getMoney",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "cash",
+          "varname": "cash",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "getMoney_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "bank",
+          "varname": "bank",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "user Money Embed",
+          "category": "Message",
+          "type": "Send Embed",
+          "fields": [
+            {
+              "name": "PC Helden Cash 💲",
+              "value": "${tempVars.cash} ",
+              "inline": "true"
+            },
+            {
+              "name": "PC Helden Bank 💳",
+              "value": "${tempVars.bank} ",
+              "inline": "true"
+            }
+          ],
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "",
+          "url": "",
+          "authorname": "${dbsVars.CommandAuthor.displayName}",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "work",
+      "actions": [
+        {
+          "name": "gen1",
+          "category": "Variable",
+          "type": "Generate Random Number",
+          "messageActionRows": [],
+          "varname": "gen1",
+          "min": "1",
+          "max": "34",
+          "savevartype": "temp"
+        },
+        {
+          "name": "addcash",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "cash",
+          "oper": "+",
+          "value": "${tempVars.gen1}"
+        },
+        {
+          "name": "sendwork",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "Der Inhaber ist Ehren Gönner und gibt dir ${tempVars.gen1} 💷, pass gut darauf auf es soll ja nicht gestohlen werden ",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "dep",
+      "actions": [
+        {
+          "name": "getDep",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "dep_var",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "getcash",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "cash",
+          "varname": "cash",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "checkmoney",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "CheckCash_1",
+              "category": "Variable",
+              "type": "Check Variable Value",
+              "trueActions": [
+                {
+                  "name": "ErrorDep_2",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "FFFFFF",
+                  "title": "Fehler ",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "du hast nicht soviel💲 auf der Hand!",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "editBank",
+                  "category": "User Data",
+                  "type": "Edit User Data",
+                  "messageActionRows": [],
+                  "user": "${dbsVars.CommandAuthor.id}",
+                  "field": "bank",
+                  "oper": "+",
+                  "value": "${tempVars.dep_var}"
+                },
+                {
+                  "name": "editBank_1",
+                  "category": "User Data",
+                  "type": "Edit User Data",
+                  "messageActionRows": [],
+                  "user": "${dbsVars.CommandAuthor.id}",
+                  "field": "cash",
+                  "oper": "-",
+                  "value": "${tempVars.dep_var}"
+                },
+                {
+                  "name": "depMsg",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "00FFE4",
+                  "title": "Erfolgreiche Transaktion",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "du hast ${tempVars.dep_var} 💲 auf die Bank gelegt!\n",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "dep_var",
+              "savevartype": "temp",
+              "compare": "greater than",
+              "value": "${tempVars.cash}"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "ErrorDep",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Fehler ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "du hast keine cash 💲 auf der Hand!",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "cash",
+          "compare": "greater than",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "with",
+      "actions": [
+        {
+          "name": "getDep_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "with_var",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "getcash_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "bank",
+          "varname": "bank",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "checkmoney_1",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "CheckCash",
+              "category": "Variable",
+              "type": "Check Variable Value",
+              "trueActions": [
+                {
+                  "name": "ErrorDep_3",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "FFFFFF",
+                  "title": "Fehler ",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "du hast nicht soviel 💲 auf der bank!",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "editBank_2",
+                  "category": "User Data",
+                  "type": "Edit User Data",
+                  "messageActionRows": [],
+                  "user": "${dbsVars.CommandAuthor.id}",
+                  "field": "bank",
+                  "oper": "-",
+                  "value": "${tempVars.with_var}"
+                },
+                {
+                  "name": "editBank_1_1",
+                  "category": "User Data",
+                  "type": "Edit User Data",
+                  "messageActionRows": [],
+                  "user": "${dbsVars.CommandAuthor.id}",
+                  "field": "cash",
+                  "oper": "+",
+                  "value": "${tempVars.with_var}"
+                },
+                {
+                  "name": "depMsg_1",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "FFFFFF",
+                  "title": "Erfolgreiche Transaktion",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "du hast ${tempVars.with_var} 💲 dir erfolgreich ausgezahlt!\n",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "with_var",
+              "savevartype": "temp",
+              "compare": "greater than",
+              "value": "${tempVars.bank}"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "ErrorDep_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Fehler ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "du hast nicht genug 💲 auf der Bank!",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "bank",
+          "compare": "greater than",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "ticket",
+      "actions": [
+        {
+          "name": "check Teamler Permission",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "sende Ticket Panel",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Ticket Support ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Bitte Reagiere mit 🎫 , um ein Ticket zu Eröffnen\n",
+              "thumbnail": "https://cdn.discordapp.com/attachments/974012143588479009/996153935251382463/standard.gif",
+              "image": "",
+              "footer": "NXT Bot Service V1.0 ⚾",
+              "timestamp": "false",
+              "savetovariable": "TicketPanel",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "del command",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${dbsVars.CommandMessage.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            },
+            {
+              "name": "ticket panael angefordert",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "pchelden-logs",
+              "color": "FFFFFF",
+              "title": "Ticket Panel Erstellt ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Der Admin <@${dbsVars.CommandAuthor.id}> hat ein Ticket Panel Angefordert",
+              "thumbnail": "",
+              "image": "",
+              "footer": "am:",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "add panel reaktionen",
+              "category": "Reaction",
+              "type": "Add Reaction Listener",
+              "reactionActions": {
+                "🎫": [
+                  {
+                    "name": "Support Channel User",
+                    "category": "Channel Action",
+                    "type": "Create Channel",
+                    "messageActionRows": [],
+                    "channelname": "Ticket von: ${tempVars.SupportUser.displayName}",
+                    "chancategory": "984487742928994314",
+                    "reason": "Neues Ticket",
+                    "channeltype": "Text",
+                    "savetovariable": "NewTicket",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "add ticket block role",
+                    "category": "User Action",
+                    "type": "Add Role to User",
+                    "messageActionRows": [],
+                    "user": "${tempVars.SupportUser.id}",
+                    "rolename": "984885453545148426"
+                  },
+                  {
+                    "name": "update permissions",
+                    "category": "Channel Action",
+                    "type": "Update Channel Permissions",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "permid": "${tempVars.SupportUser.id}",
+                    "permissions": [
+                      "VIEW_CHANNEL",
+                      "SEND_MESSAGES",
+                      "READ_MESSAGE_HISTORY"
+                    ],
+                    "allow": "Allow"
+                  },
+                  {
+                    "name": "update permissions_1",
+                    "category": "Channel Action",
+                    "type": "Update Channel Permissions",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "permid": "909557372958150713",
+                    "permissions": [
+                      "VIEW_CHANNEL",
+                      "SEND_MESSAGES",
+                      "MANAGE_MESSAGES",
+                      "READ_MESSAGE_HISTORY"
+                    ],
+                    "allow": "Allow"
+                  },
+                  {
+                    "name": "updateSupportPermission_3",
+                    "category": "Channel Action",
+                    "type": "Update Channel Permissions",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "permid": "909557372828139543",
+                    "permissions": [
+                      "VIEW_CHANNEL",
+                      "SEND_MESSAGES",
+                      "READ_MESSAGE_HISTORY"
+                    ],
+                    "allow": "Deny"
+                  },
+                  {
+                    "name": "del error",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "5",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "send User Team Ping",
+                    "category": "Message",
+                    "type": "Send Message",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "messagetext": "<@&909557372958150713> der User <@${tempVars.SupportUser.id}> benötigt Hilfe! ",
+                    "savetovariable": "PingSupporterUser",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "del error_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "5",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "Send Ticket Msg",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "color": "FFFFFF",
+                    "title": "Willkommen in deinem Ticket",
+                    "url": "",
+                    "authorname": "Ticket Nr: ${tempVars.SupportUser.id}",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Ein Teamler wird sich bald dem Ticket anschließen, bitte Erläutere dein anliegen in der zeit bitte einmal schriftlich hier im Channel",
+                    "thumbnail": "${tempVars.SupportUser.user.avatarURL}",
+                    "image": "",
+                    "footer": "am:",
+                    "timestamp": "BOOL_TRUE@@",
+                    "savetovariable": "ticketmsg",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "add Close Emoji",
+                    "category": "Reaction",
+                    "type": "Add Reaction Listener",
+                    "reactionActions": {
+                      "🔐": [
+                        {
+                          "name": "chek user permission",
+                          "category": "User Action",
+                          "type": "Check User Permissions",
+                          "trueActions": [
+                            {
+                              "name": "Frag Nach",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FFFFFF",
+                              "title": "Ticket Schließen?",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "<@${tempVars.CloseUser.id}> soll das Ticket wirklich Geschlossen werden?",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "am:",
+                              "timestamp": "BOOL_TRUE@@",
+                              "savetovariable": "fragnachmessage",
+                              "savetovariabletype": "temp"
+                            },
+                            {
+                              "name": "close Ticket",
+                              "category": "Reaction",
+                              "type": "Add Reaction Listener",
+                              "reactionActions": {
+                                "✅": [
+                                  {
+                                    "name": "Close Check Msg",
+                                    "category": "Message",
+                                    "type": "Send Embed",
+                                    "messageActionRows": [],
+                                    "channelname": "${tempVars.NewTicket.id}",
+                                    "color": "FFFFFF",
+                                    "title": "Ticket Geschlossen",
+                                    "url": "",
+                                    "authorname": "",
+                                    "authorimageurl": "",
+                                    "authorlink": "",
+                                    "description": "das Ticket <#${tempVars.NewTicket.id}> wird in 5 Sekunden  Automatisch Gelöscht",
+                                    "thumbnail": "",
+                                    "image": "",
+                                    "footer": "am:",
+                                    "timestamp": "BOOL_TRUE@@",
+                                    "savetovariable": "Ticketgeschlossen",
+                                    "savetovariabletype": "temp"
+                                  },
+                                  {
+                                    "name": "del error_1_1",
+                                    "category": "Control",
+                                    "type": "Wait",
+                                    "messageActionRows": [],
+                                    "waitduration": "5",
+                                    "unit": "seconds"
+                                  },
+                                  {
+                                    "name": "del Ticket",
+                                    "category": "Channel Action",
+                                    "type": "Delete Channel",
+                                    "messageActionRows": [],
+                                    "channelname": "${tempVars.NewTicket.id}",
+                                    "reason": "Ticket wurde Geschlossen"
+                                  },
+                                  {
+                                    "name": "del Ticket Block Role",
+                                    "category": "User Action",
+                                    "type": "Remove Role From User",
+                                    "messageActionRows": [],
+                                    "user": "${tempVars.SupportUser.id}",
+                                    "rolename": "981922151043047444",
+                                    "reason": "ticket Beendet"
+                                  }
+                                ],
+                                "❌": [
+                                  {
+                                    "name": "del frag nach",
+                                    "category": "Message",
+                                    "type": "Delete Message",
+                                    "messageActionRows": [],
+                                    "varname": "${tempVars.fragnachmessage.id}",
+                                    "channelname": "${tempVars.NewTicket.id}"
+                                  }
+                                ]
+                              },
+                              "messageActionRows": [],
+                              "message": "${tempVars.fragnachmessage.id}",
+                              "duration": "0",
+                              "reactionemoji": "CloseTicket3",
+                              "reactionuser": "CloseUser3",
+                              "react": "BOOL_TRUE@@"
+                            }
+                          ],
+                          "falseActions": [
+                            {
+                              "name": "Close Fail",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FF0000",
+                              "title": "Fehler!",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "<@${tempVars.CloseUser.id}> du kannst dein eigenes Ticket nicht Schließen bitte wende dich an den Support",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "am:",
+                              "timestamp": "false",
+                              "savetovariable": "failclosebyuser",
+                              "savetovariabletype": "temp"
+                            },
+                            {
+                              "name": "del error_2",
+                              "category": "Control",
+                              "type": "Wait",
+                              "messageActionRows": [],
+                              "waitduration": "5",
+                              "unit": "seconds"
+                            },
+                            {
+                              "name": "delete error",
+                              "category": "Message",
+                              "type": "Delete Message",
+                              "messageActionRows": [],
+                              "varname": "${tempVars.failclosebyuser.id}",
+                              "channelname": "${tempVars.NewTicket.id}"
+                            }
+                          ],
+                          "messageActionRows": [],
+                          "user": "${tempVars.CloseUser.id}",
+                          "permissions": [
+                            "ADMINISTRATOR",
+                            "KICK_MEMBERS",
+                            "BAN_MEMBERS",
+                            "MANAGE_CHANNELS"
+                          ]
+                        }
+                      ]
+                    },
+                    "messageActionRows": [],
+                    "message": "${tempVars.ticketmsg.id}",
+                    "duration": "0",
+                    "reactionemoji": "Colse2Emoj",
+                    "reactionuser": "CloseUser",
+                    "react": "BOOL_TRUE@@"
+                  },
+                  {
+                    "name": "add Claim Reaction",
+                    "category": "Reaction",
+                    "type": "Add Reaction Listener",
+                    "reactionActions": {
+                      "🔑": [
+                        {
+                          "name": "chek user permission_1",
+                          "category": "User Action",
+                          "type": "Check User Permissions",
+                          "trueActions": [
+                            {
+                              "name": "updateSupportPermission",
+                              "category": "Channel Action",
+                              "type": "Update Channel Permissions",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "permid": "${tempVars.ClaimUser.id}",
+                              "permissions": [
+                                "VIEW_CHANNEL",
+                                "SEND_MESSAGES",
+                                "MANAGE_MESSAGES",
+                                "READ_MESSAGE_HISTORY"
+                              ],
+                              "allow": "Allow"
+                            },
+                            {
+                              "name": "updateSupportPermission_1",
+                              "category": "Channel Action",
+                              "type": "Update Channel Permissions",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "permid": "909557372958150713",
+                              "permissions": [
+                                "VIEW_CHANNEL"
+                              ],
+                              "allow": "Deny"
+                            },
+                            {
+                              "name": "updateSupportPermission_2",
+                              "category": "Channel Action",
+                              "type": "Update Channel Permissions",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "permid": "${tempVars.SupportUser.id}",
+                              "permissions": [
+                                "VIEW_CHANNEL",
+                                "SEND_MESSAGES",
+                                "READ_MESSAGE_HISTORY"
+                              ],
+                              "allow": "Allow"
+                            },
+                            {
+                              "name": "send claim message",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FFFFFF",
+                              "title": "Ticket Übernommen von [<@${tempVars.ClaimUser.id}>] ",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "Ich [<@${tempVars.ClaimUser.id}>] werde mich nun um dein Anliegen Kümmern",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "am:",
+                              "timestamp": "BOOL_TRUE@@",
+                              "savetovariable": "",
+                              "savetovariabletype": "temp"
+                            }
+                          ],
+                          "falseActions": [
+                            {
+                              "name": "Close Fail_1",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FF0000",
+                              "title": "Fehler!",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "<@${tempVars.CloseUser.id}> du kannst dein eigenes Ticket nicht bearbeiten bitte wende dich an den Support",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "claimTicket01",
+                              "savetovariabletype": "temp"
+                            },
+                            {
+                              "name": "del error_2_1",
+                              "category": "Control",
+                              "type": "Wait",
+                              "messageActionRows": [],
+                              "waitduration": "5",
+                              "unit": "seconds"
+                            },
+                            {
+                              "name": "delete error_1",
+                              "category": "Message",
+                              "type": "Delete Message",
+                              "messageActionRows": [],
+                              "varname": "${tempVars.claimTicket01.id}",
+                              "channelname": "${tempVars.NewTicket.id}"
+                            }
+                          ],
+                          "messageActionRows": [],
+                          "user": "${tempVars.ClaimUser.id}",
+                          "permissions": [
+                            "KICK_MEMBERS",
+                            "BAN_MEMBERS",
+                            "MANAGE_CHANNELS"
+                          ]
+                        }
+                      ]
+                    },
+                    "messageActionRows": [],
+                    "message": "${tempVars.ticketmsg.id}",
+                    "duration": "0",
+                    "reactionemoji": "ClaimEmoji",
+                    "reactionuser": "ClaimUser",
+                    "react": "BOOL_TRUE@@"
+                  }
+                ]
+              },
+              "messageActionRows": [],
+              "message": "${tempVars.TicketPanel.id}",
+              "duration": "0",
+              "reactionemoji": "SupportEmoji",
+              "reactionuser": "SupportUser",
+              "react": "BOOL_TRUE@@"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "Keine Berechtigung",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Fehlende Berechtigung!",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Du hast nicht die Berechtigng diesen Befehl auszuführen!",
+              "thumbnail": "",
+              "image": "",
+              "footer": "am:",
+              "timestamp": "false",
+              "savetovariable": "PanelFail",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "del error_3",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "delete error_1_1",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.PanelFail.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "ADMINISTRATOR",
+            "MANAGE_CHANNELS",
+            "VIEW_CHANNEL",
+            "MANAGE_MESSAGES",
+            "MANAGE_NICKNAMES"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tran",
+      "actions": [
+        {
+          "name": "getDep_1_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "tran_var",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "Spieler der Gebannt werden Soll_1_2_1",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "tranusermoney",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "LängedesBannes_1_1_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "tranbetrag",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "2"
+        },
+        {
+          "name": "getcash_1_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "bank",
+          "varname": "bank",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "checkmoney_1_1",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "CheckCash_2",
+              "category": "Variable",
+              "type": "Check Variable Value",
+              "trueActions": [
+                {
+                  "name": "editBank_2_1",
+                  "category": "User Data",
+                  "type": "Edit User Data",
+                  "messageActionRows": [],
+                  "user": "${dbsVars.CommandAuthor.id}",
+                  "field": "bank",
+                  "oper": "-",
+                  "value": "${tempVars.tranbetrag}"
+                },
+                {
+                  "name": "editBank_1_1_1",
+                  "category": "User Data",
+                  "type": "Edit User Data",
+                  "messageActionRows": [],
+                  "user": "${tempVars.tranusermoney.id}",
+                  "field": "bank",
+                  "oper": "+",
+                  "value": "${tempVars.tranbetrag}"
+                },
+                {
+                  "name": "depMsg_1_1",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "00FFE4",
+                  "title": "Erfolgreiche Transaktion",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "du hast erfolgreich dem User <@${tempVars.tranusermoney.id}> ${tempVars.tranbetrag} überwiesen dies kann nicht mehr storniert werden!",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "ErrorDep_1_1_1",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "FFFFFF",
+                  "title": "Fehler ",
+                  "url": "",
+                  "authorname": "",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "du hast nicht genug 💲 auf der Bank!",
+                  "thumbnail": "",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "false",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "tran_var",
+              "savevartype": "temp",
+              "compare": "greater than",
+              "value": "${tempVars.bank}"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "ErrorDep_1_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFFFF",
+              "title": "Fehler ",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "du hast nicht genug 💲 auf der Bank!",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "bank",
+          "compare": "greater than",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "baluser",
+      "actions": [
+        {
+          "name": "Spieler der Gebannt werden Soll_1_1",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "usergeld",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "getMoney_2",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.usergeld.id}",
+          "field": "cash",
+          "varname": "cash",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "getMoney_1_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.usergeld.id}",
+          "field": "bank",
+          "varname": "bank",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "user Money Embed_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "fields": [
+            {
+              "name": "PC Helden Cash 💷",
+              "value": "${tempVars.cash} ",
+              "inline": "true"
+            },
+            {
+              "name": "PC Helden Bank 💳",
+              "value": "${tempVars.bank} ",
+              "inline": "true"
+            }
+          ],
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "",
+          "url": "",
+          "authorname": "${dbsVars.CommandAuthor.displayName}",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "Der user <@${tempVars.usergeld.id}> Hat dies auf seinem konto",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "givemoney",
+      "perms": [],
+      "actions": [
+        {
+          "name": "getDep_1_1_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "givemoney_var",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "Spieler der Gebannt werden Soll_1_2",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "setmoneyuser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "LängedesBannes_1_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "höhedesGeldeswasgecheatedwurde",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "2"
+        },
+        {
+          "name": "editBank_2_1_1",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.setmoneyuser.id}",
+          "field": "cash",
+          "oper": "+",
+          "value": "${tempVars.höhedesGeldeswasgecheatedwurde}"
+        },
+        {
+          "name": "depMsg_1_1_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Erfolgreiche Transaktion",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "du hast erfolgreich dem User <@${tempVars.setmoneyuser.id}>\nerfolgreich ${tempVars.höhedesGeldeswasgecheatedwurde} 💲 Gecheated",
+          "thumbnail": "",
+          "image": "",
+          "footer": "am:",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "report",
+      "actions": [
+        {
+          "name": "getusertoreport",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "getusertoreport",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "getreasonforreport",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "getreasonforreport",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "sendemedzureport",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+          "color": "FFFFFF",
+          "title": "Report Gesendet",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Du hast den User <@${tempVars.getusertoreport.id}> Reportet \nein Admin / Supporter wird sich bald darum Kümmern!",
+          "thumbnail": "https://cdn.discordapp.com/attachments/996154373635850243/996154485191737465/standard.gif",
+          "image": "",
+          "footer": "am",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "sendtoreportChannel",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "996485896931135600",
+          "color": "FFFFFF",
+          "title": "Report!",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Der User: <@${tempVars.getusertoreport.id}>\nwurde von: <@${dbsVars.CommandAuthor.id}>\nReportet \nDer Grund:${tempVars.getreasonforreport}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "am:",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "+1 Report",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.getusertoreport.id}",
+          "field": "report",
+          "oper": "+",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "reports",
+      "perms": [
+        "inhaber",
+        "supporter"
+      ],
+      "actions": [
+        {
+          "name": "getusertocheck",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "getusertocheckuserreports",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "get reports",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.getusertoreport.id}",
+          "field": "report",
+          "varname": "reportcheck",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "usereports",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "996485896931135600",
+          "color": "FFFFFF",
+          "title": "User Reports",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "der User <@${tempVars.getusertocheckuserreports.id}>\nhat:${tempVars.reportcheck}\nreports",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "delrep",
+      "perms": [],
+      "actions": [
+        {
+          "name": "getusertocheck_1",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "userreportsclear",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "LängedesBannes_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "löschendeReports",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "2"
+        },
+        {
+          "name": "Bann grund_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "GrundfürReportClear",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "3+"
+        },
+        {
+          "name": "editBank_2_1_1_1",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.userreportsclear.id}",
+          "field": "report",
+          "oper": "-",
+          "value": "${tempVars.löschendeReports}"
+        },
+        {
+          "name": "report Clear",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "996485896931135600",
+          "color": "FFFFFF",
+          "title": "Report Clear",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Der Inhaber <@${dbsVars.CommandAuthor.id}>\nhat die Reports Für <@${tempVars.userreportsclear.id}>\ngelöscht.\nGrund: ${tempVars.GrundfürReportClear}",
+          "thumbnail": "https://cdn.discordapp.com/attachments/996154373635850243/996154485191737465/standard.gif",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "bwatch",
+      "actions": [
+        {
+          "name": "sende Ticket Panel_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Bot Aktivität",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Wartungs Modus ❌\nwieder Erreichbar ✅\nBewirbt den Server 💲",
+          "thumbnail": "https://cdn.discordapp.com/attachments/974012143588479009/996153935251382463/standard.gif",
+          "image": "",
+          "footer": "am",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "AktivitätBot",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "del command_1",
+          "category": "Message",
+          "type": "Delete Message",
+          "messageActionRows": [],
+          "varname": "${dbsVars.CommandMessage.id}",
+          "channelname": "${dbsVars.CommandChannel.id}"
+        },
+        {
+          "name": "botaktivität",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "❌": [
+              {
+                "name": "get aktivity",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "Wartungs Modus",
+                "activitytype": "WATCHING",
+                "streamurl": ""
+              }
+            ],
+            "✅": [
+              {
+                "name": "get aktivity_1",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "Watch .help",
+                "activitytype": "PLAYING",
+                "streamurl": ""
+              }
+            ],
+            "💲": [
+              {
+                "name": "get aktivity_2",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "PC Helden Werde Jetzt Mitglied",
+                "activitytype": "LISTENING",
+                "streamurl": ""
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.AktivitätBot.id}",
+          "duration": "0",
+          "reactionemoji": "reaktionAktivität",
+          "reactionuser": "reaktionUser",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    },
+    {
+      "name": "inv",
+      "perms": [],
+      "actions": [
+        {
+          "name": "Get data",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Gold_Pass",
+          "varname": "inventory_Gold",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get data_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Diamant_Pass",
+          "varname": "inventory_Diamant",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get data_2",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Platin_Pass",
+          "varname": "inventory_Platin",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Inventar",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Du hast Folgende dinge im Inventar",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "_____________________________________________________\nGold Pass :(${tempVars.inventory_Gold})\nDiamant Pass: (${tempVars.inventory_Diamant})\nPlatin Pass: (${tempVars.inventory_Platin})\n_____________________________________________________",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "sell",
+      "actions": [
+        {
+          "name": "Get data_3",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Gold_Pass",
+          "varname": "inventory_Gold",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get data_3_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Diamant_Pass",
+          "varname": "inventory_Diamant",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get data_3_1_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Platin_Pass",
+          "varname": "inventory_Platin",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Inventar_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "du hast Folgende dinge im Rucksack",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "1️⃣Gold Pass - ${tempVars.inventory_Gold}\n2️⃣Diamant pass - ${tempVars.inventory_Diamant}\n3️⃣Platin pass - ${tempVars.inventory_Platin}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "InVSell",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "Reaktion",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "1️⃣": [
+              {
+                "name": "chek of user have Rang",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "remove Game",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "Gold_Pass",
+                    "oper": "-",
+                    "value": "1"
+                  },
+                  {
+                    "name": "give the money",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "bank",
+                    "oper": "+",
+                    "value": "50000"
+                  },
+                  {
+                    "name": "send Private Message",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                    "color": "FFFFFF",
+                    "title": "Erfolgreicher verkauf ",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Du hast erfolgreich den Gold Pass für 50000 Bits  Verkauft",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "error messahge",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler du Besitzt dieses Item Nicht",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "5Sec Warten_1_1_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "5",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "delete messages_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "3"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.sell_user.id}",
+                "field": "Gold_Pass",
+                "compare": "greater than",
+                "value": "0"
+              }
+            ],
+            "2️⃣": [
+              {
+                "name": "chek of user have Rang_1",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "remove Game_2",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "Diamant_Pass",
+                    "oper": "-",
+                    "value": "1"
+                  },
+                  {
+                    "name": "give the money_2",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "bank",
+                    "oper": "+",
+                    "value": "75000"
+                  },
+                  {
+                    "name": "send Private Message_2",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                    "color": "FFFFFF",
+                    "title": "Erfolgreicher verkauf ",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Du hast erfolgreich den Gold Pass für 75000 Bits  Verkauft",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages_3",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "error messahge_2",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler du Besitzt dieses Item Nicht",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "5Sec Warten_1_1_1_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "5",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "delete messages_1_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "3"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.sell_user.id}",
+                "field": "Diamant_Pass",
+                "compare": "greater than",
+                "value": "0"
+              }
+            ],
+            "3️⃣": [
+              {
+                "name": "chek of user have Rang_1_1",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "remove Game_2_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "Platin_Pass",
+                    "oper": "-",
+                    "value": "1"
+                  },
+                  {
+                    "name": "give the money_2_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "bank",
+                    "oper": "+",
+                    "value": "500000"
+                  },
+                  {
+                    "name": "send Private Message_2_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                    "color": "FFFFFF",
+                    "title": "Erfolgreicher verkauf ",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Du hast erfolgreich den Gold Pass für 500000 Bits  Verkauft",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages_3_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "error messahge_2_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler du Besitzt dieses Item Nicht",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "5Sec Warten_1_1_1_1_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "5",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "delete messages_1_1_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "3"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.sell_user.id}",
+                "field": "Platin_Pass",
+                "compare": "greater than",
+                "value": "0"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.InVSell.id}",
+          "duration": "60",
+          "reactionemoji": "sell_emoji",
+          "reactionuser": "sell_user",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    },
+    {
+      "name": "giveitem",
+      "perms": [],
+      "actions": [
+        {
+          "name": "getDep_1_1_1_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "giveitem_var",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "Spieler der Gebannt werden Soll_1_2_2",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "setitemuser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "LängedesBannes_1_1_2",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "itemwasgegebenwirdanzahl",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "2"
+        },
+        {
+          "name": "editBank_2_1_1_2",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.setitemuser.id}",
+          "field": "Gold_Pass",
+          "oper": "+",
+          "value": "${tempVars.itemwasgegebenwirdanzahl}"
+        },
+        {
+          "name": "depMsg_1_1_1_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Erfolgreiche Transaktion",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "du hast erfolgreich dem User <@${tempVars.setmoneyuser.id}>\nerfolgreich ${tempVars.höhedesGeldeswasgecheatedwurde} Gelöscht",
+          "thumbnail": "",
+          "image": "",
+          "footer": "am:",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "clearmoney",
+      "actions": [
+        {
+          "name": "getDep_1_1_1_2",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "clearmoney_var",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "Spieler der Gebannt werden Soll_1_2_3",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "clearusermoney",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "LängedesBannes_1_1_3",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "höhedesGeldeswasgelöschtwird",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "2"
+        },
+        {
+          "name": "editBank_2_1_1_3",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.clearusermoney.id}",
+          "field": "bank",
+          "oper": "-",
+          "value": "${tempVars.höhedesGeldeswasgelöschtwird}"
+        },
+        {
+          "name": "depMsg_1_1_1_2",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Erfolgreiche Transaktion",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "du hast erfolgreich dem User <@${tempVars.clearusermoney.id}>\nerfolgreich ${tempVars.höhedesGeldeswasgelöschtwird} 💲 Gelöscht",
+          "thumbnail": "",
+          "image": "",
+          "footer": "am:",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "buy",
+      "actions": [
+        {
+          "name": "Get data_3_2",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Gold_Pass",
+          "varname": "inventory_Gold",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get data_3_1_2",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Diamant_Pass",
+          "varname": "inventory_Diamant",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get data_3_1_1_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "Platin_Pass",
+          "varname": "inventory_Platin",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "kauf Nummer",
+          "category": "Variable",
+          "type": "Generate Random Number",
+          "messageActionRows": [],
+          "varname": "kaufnummer",
+          "min": "1000000",
+          "max": "10000000",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Inventar_1_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Der Shop ist Jetzt Offen!",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Die Angebote in Unserem Shop \n-------------------------------------------\n1️⃣Gold Pass |  100.000 Bits\n-------------------------------------------\n2️⃣Diamant pass | 150.000 Bits\n-------------------------------------------\n3️⃣Platin pass   |  1.000.000 Bits\n-------------------------------------------",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "buyaccounts",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "Reaktion_1",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "1️⃣": [
+              {
+                "name": "checkmoney_1_2",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "remove Game_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "Gold_Pass",
+                    "oper": "+",
+                    "value": "1"
+                  },
+                  {
+                    "name": "give the money_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "bank",
+                    "oper": "-",
+                    "value": "100000"
+                  },
+                  {
+                    "name": "delete messages_2",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  },
+                  {
+                    "name": "send Private Message_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                    "color": "FFFFFF",
+                    "title": "Erfolgreicher Kauf",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Du hast erfolgreich den Gold Pass für 100000 Bits Gekauft\n\nKaufbeleg Nr: ${tempVars.kaufnummer}",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "PC Helden Log_1_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "buy-logs",
+                    "color": "FFFFFF",
+                    "title": "Pass gekauft",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "der user <@${dbsVars.CommandAuthor.id}>\nhat sich soeben einen Gold Pass gekauft\nKaufbeleg Nr: ${tempVars.kaufnummer}",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "BOOL_TRUE@@",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "error messahge_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "du besitzt nicht Genügend Bits auf der Bank!",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages_2_1_2_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${dbsVars.CommandAuthor.id}",
+                "field": "bank",
+                "compare": "greater than",
+                "value": "99999"
+              }
+            ],
+            "2️⃣": [
+              {
+                "name": "checkmoney_1_2_1",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "remove Game_1_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "Diamant_Pass",
+                    "oper": "+",
+                    "value": "1"
+                  },
+                  {
+                    "name": "give the money_1_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "bank",
+                    "oper": "-",
+                    "value": "140000"
+                  },
+                  {
+                    "name": "delete messages_2_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  },
+                  {
+                    "name": "send Private Message_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                    "color": "FFFFFF",
+                    "title": "Erfolgreicher Kauf",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Du hast erfolgreich den Gold Pass für 150000 Bits Gekauft\n\nKaufbeleg Nr: ${tempVars.kaufnummer}",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "PC Helden Log_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "buy-logs",
+                    "color": "FFFFFF",
+                    "title": "Pass gekauft",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "der user <@${dbsVars.CommandAuthor.id}>\nhat sich soeben einen Diamant Pass gekauft\nKaufbeleg Nr: ${tempVars.kaufnummer}",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "BOOL_TRUE@@",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "error messahge_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "du besitzt nicht Genügend Bits auf der Bank!",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages_2_1_2",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${dbsVars.CommandAuthor.id}",
+                "field": "bank",
+                "compare": "greater than",
+                "value": "139999"
+              }
+            ],
+            "3️⃣": [
+              {
+                "name": "checkmoney_1_2_2",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "remove Game_1_1_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "Platin_Pass",
+                    "oper": "+",
+                    "value": "1"
+                  },
+                  {
+                    "name": "give the money_1_1_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "${dbsVars.CommandAuthor.id}",
+                    "field": "bank",
+                    "oper": "-",
+                    "value": "1000000"
+                  },
+                  {
+                    "name": "delete messages_2_1_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  },
+                  {
+                    "name": "send Private Message_1_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                    "color": "FFFFFF",
+                    "title": "Erfolgreicher Kauf",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "Du hast erfolgreich den Platin Pass für 1000000 Bits Gekauft\n\nKaufbeleg Nr: ${tempVars.kaufnummer}",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "PC Helden Log_1_1_2",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "buy-logs",
+                    "color": "FFFFFF",
+                    "title": "Pass gekauft",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "der user <@${dbsVars.CommandAuthor.id}>\nhat sich soeben einen Diamant Pass gekauft\nKaufbeleg Nr: ${tempVars.kaufnummer}",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "BOOL_TRUE@@",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "error messahge_1_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "du besitzt nicht Genügend Bits auf der Bank!",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages_2_1_1_1",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "2"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${dbsVars.CommandAuthor.id}",
+                "field": "bank",
+                "compare": "greater than",
+                "value": "999999"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.buyaccounts.id}",
+          "duration": "60",
+          "reactionemoji": "buy_emoji",
+          "reactionuser": "buy_user",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    },
+    {
+      "name": "reedem",
+      "actions": [
+        {
+          "name": "Inventar_1_2",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "du kannst Folgende dinge aktivieren",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Jeder Pass ist nur einmal einlösbar\n-------------------------------------------------------------------------\n1️⃣Gold Pass - ${tempVars.inventory_Gold}\n2️⃣Diamant pass - ${tempVars.inventory_Diamant}\n3️⃣Platin pass - ${tempVars.inventory_Platin}\n-------------------------------------------------------------------------",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "reedem",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "Reaktion_2",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "1️⃣": [
+              {
+                "name": "role Check",
+                "category": "User Action",
+                "type": "Check If User Has Role",
+                "trueActions": [
+                  {
+                    "name": "error messahge_2_1_1_1",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "color": "FF0000",
+                    "title": "Fehler",
+                    "url": "",
+                    "authorname": "",
+                    "authorimageurl": "",
+                    "authorlink": "",
+                    "description": "du hast bereits diesen Rang!",
+                    "thumbnail": "",
+                    "image": "",
+                    "footer": "",
+                    "timestamp": "false",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "delete messages_1_1_1_2",
+                    "category": "Channel Action",
+                    "type": "Delete All Messages",
+                    "messageActionRows": [],
+                    "channelname": "${dbsVars.CommandChannel.id}",
+                    "msgcount": "3"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "chek of user have Rang_1_2",
+                    "category": "User Data",
+                    "type": "Check User Data",
+                    "trueActions": [
+                      {
+                        "name": "remove Game_2_2",
+                        "category": "User Data",
+                        "type": "Edit User Data",
+                        "messageActionRows": [],
+                        "user": "${dbsVars.CommandAuthor.id}",
+                        "field": "Gold_Pass",
+                        "oper": "-",
+                        "value": "1"
+                      },
+                      {
+                        "name": "role add",
+                        "category": "User Action",
+                        "type": "Add Role to User",
+                        "messageActionRows": [],
+                        "user": "${dbsVars.CommandAuthor.id}",
+                        "rolename": "Gold"
+                      },
+                      {
+                        "name": "send Private Message_2_2",
+                        "category": "Message",
+                        "type": "Send Embed",
+                        "messageActionRows": [],
+                        "channelname": "${dbsVars.CommandAuthor.user.dmChannel}",
+                        "color": "FFFFFF",
+                        "title": "Erfolgreich Eingelöst",
+                        "url": "",
+                        "authorname": "",
+                        "authorimageurl": "",
+                        "authorlink": "",
+                        "description": "Du hast erfolgreich den Gold Pass für eingelöst! Herzlichen Glückwunsch",
+                        "thumbnail": "",
+                        "image": "",
+                        "footer": "",
+                        "timestamp": "false",
+                        "savetovariable": "",
+                        "savetovariabletype": "temp"
+                      },
+                      {
+                        "name": "PC Helden Log_1_1_3",
+                        "category": "Message",
+                        "type": "Send Embed",
+                        "messageActionRows": [],
+                        "channelname": "reedem-logs",
+                        "color": "FFFFFF",
+                        "title": "Pass gekauft",
+                        "url": "",
+                        "authorname": "",
+                        "authorimageurl": "",
+                        "authorlink": "",
+                        "description": "der User <@${dbsVars.CommandAuthor.id}>\nhat soeben den Gold Pass eingelöst\n\n🔐\n",
+                        "thumbnail": "",
+                        "image": "",
+                        "footer": "am",
+                        "timestamp": "BOOL_TRUE@@",
+                        "savetovariable": "",
+                        "savetovariabletype": "temp"
+                      },
+                      {
+                        "name": "delete messages_1_1_1_1",
+                        "category": "Channel Action",
+                        "type": "Delete All Messages",
+                        "messageActionRows": [],
+                        "channelname": "${dbsVars.CommandChannel.id}",
+                        "msgcount": "3"
+                      }
+                    ],
+                    "falseActions": [
+                      {
+                        "name": "error messahge_2_1_1",
+                        "category": "Message",
+                        "type": "Send Embed",
+                        "messageActionRows": [],
+                        "channelname": "${dbsVars.CommandChannel.id}",
+                        "color": "FF0000",
+                        "title": "Fehler du Besitzt dieses Item Nicht",
+                        "url": "",
+                        "authorname": "",
+                        "authorimageurl": "",
+                        "authorlink": "",
+                        "description": "",
+                        "thumbnail": "",
+                        "image": "",
+                        "footer": "",
+                        "timestamp": "false",
+                        "savetovariable": "",
+                        "savetovariabletype": "temp"
+                      },
+                      {
+                        "name": "delete messages_1_1_1_2_1",
+                        "category": "Channel Action",
+                        "type": "Delete All Messages",
+                        "messageActionRows": [],
+                        "channelname": "${dbsVars.CommandChannel.id}",
+                        "msgcount": "3"
+                      }
+                    ],
+                    "messageActionRows": [],
+                    "user": "${tempVars.reedem_user.id}",
+                    "field": "Gold_Pass",
+                    "compare": "greater than",
+                    "value": "0"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${dbsVars.CommandAuthor.id}",
+                "role": "Gold"
+              }
+            ],
+            "2️⃣": [],
+            "3️⃣": []
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.reedem.id}",
+          "duration": "60",
+          "reactionemoji": "reedem_emoji",
+          "reactionuser": "reedem_user",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    },
+    {
+      "name": "invuser",
+      "perms": [
+        "inhaber"
+      ],
+      "actions": [
+        {
+          "name": "Spieler der Gebannt werden Soll_1_1_1",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "userinventar",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "getMoney_2_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.userinventar.id}",
+          "field": "Gold_Pass",
+          "varname": "inventory_Gold",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "getMoney_2_1_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.userinventar.id}",
+          "field": "Diamant_Pass",
+          "varname": "inventory_Diamant",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "getMoney_2_1_2",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.userinventar.id}",
+          "field": "Platin_Pass",
+          "varname": "inventory_Platin",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "user Money Embed_1_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "der User **${tempVars.userinventar.displayName}** hat folgendes im Inventar",
+          "url": "",
+          "authorname": "${dbsVars.CommandAuthor.displayName}",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "Gold Pass :(${tempVars.inventory_Gold})\nDiamant Pass: (${tempVars.inventory_Diamant})\nPlatin Pass: (${tempVars.inventory_Platin})",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    }
+  ]
+}
